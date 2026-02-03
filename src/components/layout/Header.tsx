@@ -42,12 +42,7 @@ const Header = () => {
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <motion.img alt="Vesuvio Digital" className="h-12 w-auto" whileHover={{
-          scale: 1.05
-        }} transition={{
-          type: 'spring',
-          stiffness: 400
-        }} src="/lovable-uploads/b3cf6c27-4ed1-4f63-b0d6-82410201b701.png" />
+          
         </Link>
 
         {/* Desktop Navigation */}
