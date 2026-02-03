@@ -11,7 +11,6 @@ export const translations = {
     nav: {
       home: 'Home',
       services: 'Servizi',
-      highlevel: 'Soluzioni HighLevel',
       caseStudies: 'Case Studies',
       about: 'Chi Siamo',
       contact: 'Contatti',
@@ -27,7 +26,6 @@ export const translations = {
     hero: {
       title: 'Energia Vulcanica per la Tua Crescita',
       subtitle: 'Sistemi di marketing e automazione che generano lead qualificati e convertono in vendite. Risultati misurabili, zero sprechi.',
-      trustedBy: 'Partner di fiducia per',
     },
     services: {
       title: 'Cosa Facciamo',
@@ -73,23 +71,15 @@ export const translations = {
         desc: 'Sistemi che lavorano mentre dormi. Scalabilità senza stress.',
       },
     },
-    caseStudies: {
-      title: 'Risultati Reali',
-      subtitle: 'Performance certificate dai numeri',
-      viewAll: 'Tutti i Case Studies',
-    },
-    testimonials: {
-      title: 'Cosa Dicono i Clienti',
-    },
     techStack: {
-      title: 'Powered by',
+      title: 'Integrazioni',
     },
     finalCta: {
       title: 'Pronto a Far Esplodere la Tua Crescita?',
       subtitle: 'Prenota una call strategica gratuita di 30 minuti. Analizziamo il tuo business e identifichiamo le opportunità.',
     },
     footer: {
-      description: 'Agenzia digitale di Roma specializzata in sistemi di marketing automation e lead generation ad alte prestazioni.',
+      description: 'Agenzia digitale di Napoli specializzata in sistemi di marketing automation e lead generation ad alte prestazioni.',
       quickLinks: 'Link Rapidi',
       contact: 'Contatti',
       legal: 'Note Legali',
@@ -110,7 +100,6 @@ export const translations = {
         submit: 'Invia Richiesta',
       },
       info: {
-        phone: 'Telefono',
         email: 'Email',
         address: 'Indirizzo',
         hours: 'Orari',
@@ -119,12 +108,15 @@ export const translations = {
     faq: {
       title: 'Domande Frequenti',
     },
+    audit: {
+      title: 'Richiedi Audit Gratuito',
+      subtitle: 'Compila il form per ricevere un\'analisi gratuita del tuo marketing stack.',
+    },
   },
   en: {
     nav: {
       home: 'Home',
       services: 'Services',
-      highlevel: 'HighLevel Solutions',
       caseStudies: 'Case Studies',
       about: 'About',
       contact: 'Contact',
@@ -140,7 +132,6 @@ export const translations = {
     hero: {
       title: 'Volcanic Energy for Your Growth',
       subtitle: 'Marketing and automation systems that generate qualified leads and convert to sales. Measurable results, zero waste.',
-      trustedBy: 'Trusted by',
     },
     services: {
       title: 'What We Do',
@@ -186,23 +177,15 @@ export const translations = {
         desc: 'Systems that work while you sleep. Scalability without stress.',
       },
     },
-    caseStudies: {
-      title: 'Real Results',
-      subtitle: 'Performance certified by numbers',
-      viewAll: 'All Case Studies',
-    },
-    testimonials: {
-      title: 'What Clients Say',
-    },
     techStack: {
-      title: 'Powered by',
+      title: 'Integrations',
     },
     finalCta: {
       title: 'Ready to Ignite Your Growth?',
       subtitle: 'Book a free 30-minute strategy call. We analyze your business and identify opportunities.',
     },
     footer: {
-      description: 'Rome-based digital agency specializing in high-performance marketing automation and lead generation systems.',
+      description: 'Naples-based digital agency specializing in high-performance marketing automation and lead generation systems.',
       quickLinks: 'Quick Links',
       contact: 'Contact',
       legal: 'Legal',
@@ -223,7 +206,6 @@ export const translations = {
         submit: 'Submit Request',
       },
       info: {
-        phone: 'Phone',
         email: 'Email',
         address: 'Address',
         hours: 'Hours',
@@ -232,12 +214,15 @@ export const translations = {
     faq: {
       title: 'Frequently Asked Questions',
     },
+    audit: {
+      title: 'Request Free Audit',
+      subtitle: 'Fill out the form to receive a free analysis of your marketing stack.',
+    },
   },
   ru: {
     nav: {
       home: 'Главная',
       services: 'Услуги',
-      highlevel: 'Решения HighLevel',
       caseStudies: 'Кейсы',
       about: 'О Нас',
       contact: 'Контакты',
@@ -253,7 +238,6 @@ export const translations = {
     hero: {
       title: 'Вулканическая Энергия для Вашего Роста',
       subtitle: 'Маркетинговые и автоматизированные системы, которые генерируют качественные лиды и конвертируют в продажи. Измеримые результаты, ноль потерь.',
-      trustedBy: 'Нам доверяют',
     },
     services: {
       title: 'Что Мы Делаем',
@@ -299,23 +283,15 @@ export const translations = {
         desc: 'Системы, которые работают пока вы спите. Масштабирование без стресса.',
       },
     },
-    caseStudies: {
-      title: 'Реальные Результаты',
-      subtitle: 'Эффективность, подтвержденная цифрами',
-      viewAll: 'Все Кейсы',
-    },
-    testimonials: {
-      title: 'Отзывы Клиентов',
-    },
     techStack: {
-      title: 'Работаем на',
+      title: 'Интеграции',
     },
     finalCta: {
       title: 'Готовы Зажечь Свой Рост?',
       subtitle: 'Запишитесь на бесплатный 30-минутный стратегический звонок. Мы проанализируем ваш бизнес и определим возможности.',
     },
     footer: {
-      description: 'Цифровое агентство в Риме, специализирующееся на высокопроизводительных системах автоматизации маркетинга и лидогенерации.',
+      description: 'Цифровое агентство в Неаполе, специализирующееся на высокопроизводительных системах автоматизации маркетинга и лидогенерации.',
       quickLinks: 'Быстрые Ссылки',
       contact: 'Контакты',
       legal: 'Правовая Информация',
@@ -336,7 +312,6 @@ export const translations = {
         submit: 'Отправить Запрос',
       },
       info: {
-        phone: 'Телефон',
         email: 'Email',
         address: 'Адрес',
         hours: 'Часы Работы',
@@ -344,6 +319,10 @@ export const translations = {
     },
     faq: {
       title: 'Часто Задаваемые Вопросы',
+    },
+    audit: {
+      title: 'Запросить Бесплатный Аудит',
+      subtitle: 'Заполните форму, чтобы получить бесплатный анализ вашего маркетингового стека.',
     },
   },
 };

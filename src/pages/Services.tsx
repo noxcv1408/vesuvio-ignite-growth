@@ -5,13 +5,14 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
-import AnimatedCard from '@/components/shared/AnimatedCard';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
 
 const serviceCategories = {
   it: [
@@ -337,10 +338,10 @@ const Services = () => {
               transition={{ delay: 0.2 }}
             >
               <Button variant="hero" size="lg" asChild>
-                <Link to="/contact">
+                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                   {t.cta.bookCall}
                   <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
+                </a>
               </Button>
             </motion.div>
           </div>
@@ -433,14 +434,14 @@ const Services = () => {
             </h2>
             <p className="text-muted-foreground mb-8">{t.finalCta.subtitle}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" asChild>
-                <Link to="/contact">
+              <Button variant="hero" size="xl" asChild>
+                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                   {t.cta.bookCall}
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
               </Button>
-              <Button variant="dark" size="lg" asChild>
-                <Link to="/contact">{t.cta.freeAudit}</Link>
+              <Button variant="dark" size="xl" asChild>
+                <Link to="/contact#audit">{t.cta.freeAudit}</Link>
               </Button>
             </div>
           </div>

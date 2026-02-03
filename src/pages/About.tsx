@@ -1,24 +1,26 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Target, Zap, TrendingUp, Users, Award, Clock } from 'lucide-react';
+import { ArrowRight, Target, Zap, TrendingUp, Users, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
 import AnimatedCard from '@/components/shared/AnimatedCard';
 
+const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+
 const aboutContent = {
   it: {
     hero: {
       title: 'Chi Siamo',
-      subtitle: 'Energia vulcanica per la crescita del tuo business. Siamo Vesuvio, l\'agenzia digitale di Roma che trasforma le tue ambizioni in risultati misurabili.',
+      subtitle: 'Energia vulcanica per la crescita del tuo business. Siamo Vesuvio, l\'agenzia digitale di Napoli che trasforma le tue ambizioni in risultati misurabili.',
     },
     story: {
       title: 'La Nostra Storia',
       content: [
         'Vesuvio nasce dalla convinzione che il marketing digitale debba generare risultati, non solo report.',
         'Dopo anni di esperienza in agenzie internazionali e startup in rapida crescita, abbiamo fondato Vesuvio con una missione chiara: costruire sistemi di marketing e vendita che funzionano come macchine automatiche di acquisizione clienti.',
-        'Dal nostro quartier generale a Roma, serviamo clienti in tutta Italia e in Europa, con un focus maniacale su performance e ROI.',
+        'Dal nostro quartier generale a Napoli, serviamo clienti in tutta Italia e in Europa, con un focus maniacale su performance e ROI.',
       ],
     },
     mission: {
@@ -43,28 +45,18 @@ const aboutContent = {
         { num: '04', title: 'Ottimizzazione', desc: 'Monitoriamo, testiamo e miglioriamo continuamente.' },
       ],
     },
-    team: {
-      title: 'Il Team',
-      subtitle: 'Un team snello di specialisti con esperienza in aziende Fortune 500 e startup unicorn.',
-      members: [
-        { name: '[Nome Fondatore]', role: 'CEO & Strategist', bio: '10+ anni in digital marketing. Ex [Azienda].' },
-        { name: '[Nome]', role: 'Head of Automation', bio: 'Specialista HighLevel e workflow automation.' },
-        { name: '[Nome]', role: 'Performance Marketing', bio: 'Meta & Google Ads certified. €10M+ gestiti.' },
-        { name: '[Nome]', role: 'Creative Director', bio: 'Copywriting e design conversion-focused.' },
-      ],
-    },
   },
   en: {
     hero: {
       title: 'About Us',
-      subtitle: 'Volcanic energy for your business growth. We are Vesuvio, the Rome-based digital agency that transforms your ambitions into measurable results.',
+      subtitle: 'Volcanic energy for your business growth. We are Vesuvio, the Naples-based digital agency that transforms your ambitions into measurable results.',
     },
     story: {
       title: 'Our Story',
       content: [
         'Vesuvio was born from the belief that digital marketing should generate results, not just reports.',
         'After years of experience in international agencies and fast-growing startups, we founded Vesuvio with a clear mission: to build marketing and sales systems that work like automatic customer acquisition machines.',
-        'From our Rome headquarters, we serve clients across Italy and Europe, with a maniacal focus on performance and ROI.',
+        'From our Naples headquarters, we serve clients across Italy and Europe, with a maniacal focus on performance and ROI.',
       ],
     },
     mission: {
@@ -89,28 +81,18 @@ const aboutContent = {
         { num: '04', title: 'Optimization', desc: 'We monitor, test, and continuously improve.' },
       ],
     },
-    team: {
-      title: 'The Team',
-      subtitle: 'A lean team of specialists with experience at Fortune 500 companies and unicorn startups.',
-      members: [
-        { name: '[Founder Name]', role: 'CEO & Strategist', bio: '10+ years in digital marketing. Ex [Company].' },
-        { name: '[Name]', role: 'Head of Automation', bio: 'HighLevel specialist and workflow automation.' },
-        { name: '[Name]', role: 'Performance Marketing', bio: 'Meta & Google Ads certified. €10M+ managed.' },
-        { name: '[Name]', role: 'Creative Director', bio: 'Conversion-focused copywriting and design.' },
-      ],
-    },
   },
   ru: {
     hero: {
       title: 'О Нас',
-      subtitle: 'Вулканическая энергия для роста вашего бизнеса. Мы Vesuvio, цифровое агентство из Рима, которое превращает ваши амбиции в измеримые результаты.',
+      subtitle: 'Вулканическая энергия для роста вашего бизнеса. Мы Vesuvio, цифровое агентство из Неаполя, которое превращает ваши амбиции в измеримые результаты.',
     },
     story: {
       title: 'Наша История',
       content: [
         'Vesuvio родился из убеждения, что digital маркетинг должен генерировать результаты, а не только отчеты.',
         'После многих лет опыта в международных агентствах и быстрорастущих стартапах мы основали Vesuvio с четкой миссией: создавать системы маркетинга и продаж, которые работают как автоматические машины привлечения клиентов.',
-        'Из нашей штаб-квартиры в Риме мы обслуживаем клиентов по всей Италии и Европе, с маниакальным фокусом на performance и ROI.',
+        'Из нашей штаб-квартиры в Неаполе мы обслуживаем клиентов по всей Италии и Европе, с маниакальным фокусом на performance и ROI.',
       ],
     },
     mission: {
@@ -133,16 +115,6 @@ const aboutContent = {
         { num: '02', title: 'Стратегия', desc: 'Определяем план действий с четкими KPI и таймлайном.' },
         { num: '03', title: 'Реализация', desc: 'Строим и запускаем системы быстро.' },
         { num: '04', title: 'Оптимизация', desc: 'Мониторим, тестируем и постоянно улучшаем.' },
-      ],
-    },
-    team: {
-      title: 'Команда',
-      subtitle: 'Компактная команда специалистов с опытом в Fortune 500 компаниях и unicorn стартапах.',
-      members: [
-        { name: '[Имя Основателя]', role: 'CEO & Стратег', bio: '10+ лет в digital маркетинге. Ex [Компания].' },
-        { name: '[Имя]', role: 'Head of Automation', bio: 'Специалист HighLevel и workflow автоматизации.' },
-        { name: '[Имя]', role: 'Performance Marketing', bio: 'Meta & Google Ads certified. €10M+ управлено.' },
-        { name: '[Имя]', role: 'Creative Director', bio: 'Conversion-focused копирайтинг и дизайн.' },
       ],
     },
   },
@@ -260,29 +232,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="section-padding bg-charcoal-light">
-        <div className="container-custom">
-          <SectionHeading title={content.team.title} subtitle={content.team.subtitle} />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {content.team.members.map((member, index) => (
-              <AnimatedCard key={index} delay={index * 0.1}>
-                <div className="w-20 h-20 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-10 h-10 text-muted-foreground" />
-                </div>
-                <h3 className="font-display text-lg font-semibold text-foreground text-center">
-                  {member.name}
-                </h3>
-                <p className="text-primary text-sm text-center mb-2">{member.role}</p>
-                <p className="text-muted-foreground text-sm text-center">{member.bio}</p>
-              </AnimatedCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="section-padding">
+      <section className="section-padding bg-charcoal-light">
         <div className="container-custom">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -290,10 +241,10 @@ const About = () => {
             </h2>
             <p className="text-muted-foreground mb-8">{t.finalCta.subtitle}</p>
             <Button variant="hero" size="xl" asChild>
-              <Link to="/contact">
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                 {t.cta.bookCall}
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              </a>
             </Button>
           </div>
         </div>

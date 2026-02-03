@@ -7,6 +7,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { languages, Language } from '@/lib/i18n';
 import vesuvioLogo from '@/assets/vesuvio-logo.png';
 
+const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,8 +27,6 @@ const Header = () => {
   const navLinks = [
     { href: '/', label: t.nav.home },
     { href: '/services', label: t.nav.services },
-    { href: '/highlevel', label: t.nav.highlevel },
-    { href: '/case-studies', label: t.nav.caseStudies },
     { href: '/about', label: t.nav.about },
     { href: '/contact', label: t.nav.contact },
   ];
@@ -46,7 +46,7 @@ const Header = () => {
         <Link to="/" className="flex items-center gap-2 group">
           <motion.img
             src={vesuvioLogo}
-            alt="Vesuvio"
+            alt="Vesuvio Digital"
             className="h-12 w-auto"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400 }}
@@ -113,10 +113,12 @@ const Header = () => {
           </div>
 
           <Button variant="lavaOutline" size="sm" asChild>
-            <Link to="/contact">{t.cta.freeAudit}</Link>
+            <Link to="/contact#audit">{t.cta.freeAudit}</Link>
           </Button>
           <Button variant="lava" size="sm" asChild>
-            <Link to="/contact">{t.cta.bookCall}</Link>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              {t.cta.bookCall}
+            </a>
           </Button>
         </div>
 
@@ -174,14 +176,14 @@ const Header = () => {
 
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 <Button variant="lavaOutline" asChild>
-                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/contact#audit" onClick={() => setIsMobileMenuOpen(false)}>
                     {t.cta.freeAudit}
                   </Link>
                 </Button>
                 <Button variant="lava" asChild>
-                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
                     {t.cta.bookCall}
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>
