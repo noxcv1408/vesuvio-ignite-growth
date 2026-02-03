@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Target, Zap, Star, Settings, BarChart3, Clock, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
+import RequestAuditDialog from '@/components/shared/RequestAuditDialog';
 import {
   Accordion,
   AccordionContent,
@@ -306,7 +306,7 @@ const faqData = {
 };
 
 const Services = () => {
-  const { language, t } = useLanguage();
+  const { language, t, getLocalizedPath } = useLanguage();
   const services = serviceCategories[language];
   const faqs = faqData[language];
 
@@ -389,7 +389,9 @@ const Services = () => {
                     </ul>
                     <div className="mt-6">
                       <Button variant="lavaOutline" asChild>
-                        <Link to="/contact">{t.cta.getStarted}</Link>
+                        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                          {t.cta.bookCall}
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -440,9 +442,13 @@ const Services = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </Button>
-              <Button variant="dark" size="xl" asChild>
-                <Link to="/contact#audit">{t.cta.freeAudit}</Link>
-              </Button>
+              <RequestAuditDialog
+                trigger={
+                  <Button variant="dark" size="xl">
+                    {t.cta.freeAudit}
+                  </Button>
+                }
+              />
             </div>
           </div>
         </div>

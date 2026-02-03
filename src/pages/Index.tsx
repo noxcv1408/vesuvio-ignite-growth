@@ -10,6 +10,12 @@ import RequestAuditDialog from '@/components/shared/RequestAuditDialog';
 
 const BOOKING_URL = 'https://calendar.app.google/Pf3jmxHgmtEtdKGX9';
 
+// Helper hook for localized links
+const useLocalizedLink = () => {
+  const { getLocalizedPath } = useLanguage();
+  return getLocalizedPath;
+};
+
 // Hero Section
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -114,7 +120,7 @@ const HeroSection = () => {
 
 // Services Section
 const ServicesSection = () => {
-  const { t } = useLanguage();
+  const { t, getLocalizedPath } = useLanguage();
 
   const services = [
     { icon: Target, ...t.services.leadGen },
@@ -148,7 +154,7 @@ const ServicesSection = () => {
           className="text-center mt-12"
         >
           <Button variant="lavaOutline" size="lg" asChild>
-            <Link to="/services">
+            <Link to={getLocalizedPath('/services')}>
               {t.cta.learnMore}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
