@@ -6,8 +6,9 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
 import AnimatedCard from '@/components/shared/AnimatedCard';
+import RequestAuditDialog from '@/components/shared/RequestAuditDialog';
 
-const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+const BOOKING_URL = 'https://calendar.app.google/Pf3jmxHgmtEtdKGX9';
 
 // Hero Section
 const HeroSection = () => {
@@ -18,11 +19,11 @@ const HeroSection = () => {
       {/* Animated background */}
       <div className="absolute inset-0 lava-bg" />
       <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background to-transparent" />
-      
+
       {/* Floating elements */}
       <motion.div
         className="absolute top-1/4 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
-        animate={{ 
+        animate={{
           y: [0, 30, 0],
           scale: [1, 1.1, 1],
         }}
@@ -30,7 +31,7 @@ const HeroSection = () => {
       />
       <motion.div
         className="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"
-        animate={{ 
+        animate={{
           y: [0, -40, 0],
           scale: [1, 1.15, 1],
         }}
@@ -76,14 +77,19 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button variant="hero" size="xl" asChild>
-              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
                 {t.cta.bookCall}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
             </Button>
-            <Button variant="heroSecondary" size="xl" asChild>
-              <Link to="/contact#audit">{t.cta.freeAudit}</Link>
-            </Button>
+
+            <RequestAuditDialog
+              trigger={
+                <Button variant="heroSecondary" size="xl">
+                  {t.cta.freeAudit}
+                </Button>
+              }
+            />
           </motion.div>
         </div>
       </div>
@@ -129,9 +135,7 @@ const ServicesSection = () => {
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                 <service.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-display text-xl font-semibold text-foreground mb-3">
-                {service.title}
-              </h3>
+              <h3 className="font-display text-xl font-semibold text-foreground mb-3">{service.title}</h3>
               <p className="text-muted-foreground">{service.desc}</p>
             </AnimatedCard>
           ))}
@@ -169,7 +173,7 @@ const WhyVesuvioSection = () => {
   return (
     <section className="section-padding bg-charcoal-light relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-radial-lava opacity-30" />
-      
+
       <div className="container-custom relative z-10">
         <SectionHeading title={t.whyVesuvio.title} subtitle={t.whyVesuvio.subtitle} />
 
@@ -187,9 +191,7 @@ const WhyVesuvioSection = () => {
                 <pillar.icon className="w-7 h-7 text-primary" />
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                  {pillar.title}
-                </h3>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">{pillar.title}</h3>
                 <p className="text-muted-foreground">{pillar.desc}</p>
               </div>
             </motion.div>
@@ -204,14 +206,7 @@ const WhyVesuvioSection = () => {
 const TechStackSection = () => {
   const { t } = useLanguage();
 
-  const techs = [
-    'Meta Ads',
-    'Google Ads',
-    'Stripe',
-    'Twilio',
-    'Zapier',
-    'Make',
-  ];
+  const techs = ['Meta Ads', 'Google Ads', 'Stripe', 'Twilio', 'Zapier', 'Make'];
 
   return (
     <section className="py-16 border-y border-border">
@@ -277,14 +272,19 @@ const FinalCtaSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button variant="hero" size="xl" asChild className="animate-glow-pulse">
-              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
                 {t.cta.bookCall}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
             </Button>
-            <Button variant="dark" size="xl" asChild>
-              <Link to="/contact#audit">{t.cta.freeAudit}</Link>
-            </Button>
+
+            <RequestAuditDialog
+              trigger={
+                <Button variant="dark" size="xl">
+                  {t.cta.freeAudit}
+                </Button>
+              }
+            />
           </motion.div>
         </div>
       </div>
