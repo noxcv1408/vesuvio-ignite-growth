@@ -11,7 +11,7 @@ type Props = {
   trigger: React.ReactNode;
 };
 
-const AUDIT_EMAIL = 'info@vesuviodigital.com';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mvzqjgvq';
 
 export default function RequestAuditDialog({ trigger }: Props) {
   const { language, t } = useLanguage();
@@ -24,47 +24,84 @@ export default function RequestAuditDialog({ trigger }: Props) {
     email: '',
     website: '',
     goals: '',
+    company: '',
   });
 
-  const handleAuditSubmit = (e: React.FormEvent) => {
+  const handleAuditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const subject = encodeURIComponent(`Richiesta Audit Gratuito - ${auditFormData.name}`);
-    const body = encodeURIComponent(
-      `Nome: ${auditFormData.name}\nEmail: ${auditFormData.email}\nSito Web: ${auditFormData.website || 'N/A'}\n\nObiettivi:\n${auditFormData.goals}`
-    );
+    try {
+      const payload = new FormData();
+      payload.append('name', auditFormData.name);
+      payload.append('email', auditFormData.email);
+      payload.append('website', auditFormData.website);
+      payload.append('goals', auditFormData.goals);
+      payload.append('company', auditFormData.company);
 
-    window.location.href = `mailto:${AUDIT_EMAIL}?subject=${subject}&body=${body}`;
+      // Honeypot for spam filtering
+      payload.append('_gotcha', '');
 
-    toast({
-      title: language === 'it' ? 'Richiesta audit pronta!' : language === 'en' ? 'Audit request ready!' : 'Запрос аудита готов!',
-      description:
-        language === 'it'
-          ? 'Si aprirà il tuo client email per inviare la richiesta.'
-          : language === 'en'
-            ? 'Your email client will open to send the request.'
-            : 'Откроется ваш почтовый клиент для отправки запроса.',
-    });
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: payload,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
 
-    setAuditFormData({ name: '', email: '', website: '', goals: '' });
-    setIsSubmitting(false);
-    setOpen(false);
+      if (!res.ok) {
+        throw new Error('Form submission failed');
+      }
+
+      toast({
+        title: language === 'it' ? 'Richiesta inviata!' : language === 'en' ? 'Request sent!' : 'Запрос отправлен!',
+        description:
+          language === 'it'
+            ? 'Ti rispondiamo entro 1 giorno lavorativo.'
+            : language === 'en'
+              ? 'We\'ll get back to you within 1 business day.'
+              : 'Ответим в течение 1 рабочего дня.',
+      });
+
+      setAuditFormData({ name: '', email: '', website: '', goals: '', company: '' });
+      setOpen(false);
+    } catch {
+      toast({
+        title: language === 'it' ? 'Errore invio' : language === 'en' ? 'Send error' : 'Ошибка отправки',
+        description:
+          language === 'it'
+            ? 'Riprova tra poco o scrivici a info@vesuviodigital.com.'
+            : language === 'en'
+              ? 'Please try again or email info@vesuviodigital.com.'
+              : 'Попробуйте ещё раз или напишите на info@vesuviodigital.com.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const dialogTitle =
+    language === 'it'
+      ? 'Ricevi un audit gratuito'
+      : language === 'en'
+        ? 'Get a free audit'
+        : 'Получить бесплатный аудит';
+
+  const dialogDescription =
+    language === 'it'
+      ? 'Compila i campi: ti mandiamo 5 azioni pratiche per migliorare risultati e conversioni.'
+      : language === 'en'
+        ? 'Fill the fields: we\'ll send 5 practical actions to improve results and conversions.'
+        : 'Заполните поля: пришлём 5 практических шагов для роста и конверсий.';
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {trigger}
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>{t.cta.freeAudit}</DialogTitle>
-          <DialogDescription>
-            {language === 'it'
-              ? 'Compila i campi e ti prepariamo una email da inviare in un click.'
-              : language === 'en'
-                ? 'Fill the fields and we\'ll prepare an email you can send with one click.'
-                : 'Заполните поля — мы подготовим письмо, которое вы отправите в один клик.'}
-          </DialogDescription>
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleAuditSubmit} className="space-y-4">
@@ -86,6 +123,16 @@ export default function RequestAuditDialog({ trigger }: Props) {
                 onChange={(e) => setAuditFormData({ ...auditFormData, email: e.target.value })}
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-2">
+              {language === 'it' ? 'Azienda' : language === 'en' ? 'Company' : 'Компания'}
+            </label>
+            <Input
+              value={auditFormData.company}
+              onChange={(e) => setAuditFormData({ ...auditFormData, company: e.target.value })}
+            />
           </div>
 
           <div>
@@ -113,7 +160,7 @@ export default function RequestAuditDialog({ trigger }: Props) {
           </div>
 
           <Button type="submit" variant="lava" size="lg" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? '...' : t.cta.freeAudit}
+            {isSubmitting ? '...' : language === 'it' ? 'Richiedi audit' : language === 'en' ? 'Request audit' : 'Запросить аудит'}
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </form>
