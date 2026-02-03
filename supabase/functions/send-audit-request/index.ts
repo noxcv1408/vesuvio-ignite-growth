@@ -61,11 +61,11 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Create SMTP client for Zoho
+    // Create SMTP client for Zoho using SSL on port 465
     const client = new SMTPClient({
       connection: {
-        hostname: "smtp.zoho.com",
-        port: 587,
+        hostname: "smtppro.zoho.eu",
+        port: 465,
         tls: true,
         auth: {
           username: smtpUser,
