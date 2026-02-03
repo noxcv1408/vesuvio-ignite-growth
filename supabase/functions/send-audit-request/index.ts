@@ -81,7 +81,7 @@ Inviato dal form di Vesuvio Digital
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: "Vesuvio Digital <onboarding@resend.dev>",
+      from: "Vesuvio Digital <noreply@vesuviodigital.com>",
       to: ["info@vesuviodigital.com"],
       subject: `🔥 Nuova Richiesta Audit - ${name}`,
       text: emailContent,
