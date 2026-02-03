@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
-import { useState } from 'react';
+import { Mail, MapPin, Clock, Send, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,6 +15,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
+
+const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
 
 const faqData = {
   it: [
@@ -31,7 +33,7 @@ const faqData = {
       answer: 'Un setup completo di automazione richiede 4-8 settimane. Campagne ads possono partire in 7-14 giorni. Durante la call ti daremo una timeline precisa.',
     },
     {
-      question: 'Lavorate solo con aziende di Roma?',
+      question: 'Lavorate solo con aziende di Napoli?',
       answer: 'No, lavoriamo con clienti in tutta Italia e in Europa. Il 70% del nostro lavoro è da remoto, con call regolari e report dettagliati.',
     },
     {
@@ -53,7 +55,7 @@ const faqData = {
       answer: 'A complete automation setup requires 4-8 weeks. Ad campaigns can start in 7-14 days. During the call we\'ll give you a precise timeline.',
     },
     {
-      question: 'Do you only work with Rome-based companies?',
+      question: 'Do you only work with Naples-based companies?',
       answer: 'No, we work with clients across Italy and Europe. 70% of our work is remote, with regular calls and detailed reports.',
     },
     {
@@ -75,7 +77,7 @@ const faqData = {
       answer: 'Полная настройка автоматизации требует 4-8 недель. Рекламные кампании могут стартовать за 7-14 дней. На звонке дадим точный таймлайн.',
     },
     {
-      question: 'Вы работаете только с компаниями из Рима?',
+      question: 'Вы работаете только с компаниями из Неаполя?',
       answer: 'Нет, мы работаем с клиентами по всей Италии и Европе. 70% нашей работы удаленно, с регулярными звонками и детальными отчетами.',
     },
     {
@@ -92,37 +94,82 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     company: '',
     message: '',
   });
+  const [auditFormData, setAuditFormData] = useState({
+    name: '',
+    email: '',
+    website: '',
+    goals: '',
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAuditSubmitting, setIsAuditSubmitting] = useState(false);
+
+  // Handle hash scroll
+  useEffect(() => {
+    if (window.location.hash === '#audit') {
+      setTimeout(() => {
+        const element = document.getElementById('audit');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Create mailto link
+    const subject = encodeURIComponent(`Richiesta da ${formData.name} - ${formData.company || 'Sito web'}`);
+    const body = encodeURIComponent(
+      `Nome: ${formData.name}\nEmail: ${formData.email}\nAzienda: ${formData.company || 'N/A'}\n\nMessaggio:\n${formData.message}`
+    );
+    window.location.href = `mailto:info@vesuviodigital.com?subject=${subject}&body=${body}`;
     
     toast({
-      title: language === 'it' ? 'Richiesta inviata!' : language === 'en' ? 'Request sent!' : 'Запрос отправлен!',
+      title: language === 'it' ? 'Email pronta!' : language === 'en' ? 'Email ready!' : 'Email готов!',
       description: language === 'it' 
-        ? 'Ti contatteremo entro 24 ore.' 
+        ? 'Si aprirà il tuo client email per inviare il messaggio.' 
         : language === 'en' 
-        ? 'We\'ll contact you within 24 hours.' 
-        : 'Мы свяжемся с вами в течение 24 часов.',
+        ? 'Your email client will open to send the message.' 
+        : 'Откроется ваш почтовый клиент для отправки сообщения.',
     });
     
-    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    setFormData({ name: '', email: '', company: '', message: '' });
     setIsSubmitting(false);
   };
 
+  const handleAuditSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsAuditSubmitting(true);
+    
+    // Create mailto link for audit
+    const subject = encodeURIComponent(`Richiesta Audit Gratuito - ${auditFormData.name}`);
+    const body = encodeURIComponent(
+      `Nome: ${auditFormData.name}\nEmail: ${auditFormData.email}\nSito Web: ${auditFormData.website || 'N/A'}\n\nObiettivi:\n${auditFormData.goals}`
+    );
+    window.location.href = `mailto:info@vesuviodigital.com?subject=${subject}&body=${body}`;
+    
+    toast({
+      title: language === 'it' ? 'Richiesta audit pronta!' : language === 'en' ? 'Audit request ready!' : 'Запрос аудита готов!',
+      description: language === 'it' 
+        ? 'Si aprirà il tuo client email per inviare la richiesta.' 
+        : language === 'en' 
+        ? 'Your email client will open to send the request.' 
+        : 'Откроется ваш почтовый клиент для отправки запроса.',
+    });
+    
+    setAuditFormData({ name: '', email: '', website: '', goals: '' });
+    setIsAuditSubmitting(false);
+  };
+
   const contactInfo = [
-    { icon: Phone, label: t.contact.info.phone, value: '+39 06 1234 5678' },
-    { icon: Mail, label: t.contact.info.email, value: 'info@vesuvio.agency' },
-    { icon: MapPin, label: t.contact.info.address, value: 'Via Roma 123, 00100 Roma, Italia' },
-    { icon: Clock, label: t.contact.info.hours, value: language === 'it' ? 'Lun-Ven: 9:00 - 18:00' : language === 'en' ? 'Mon-Fri: 9:00 AM - 6:00 PM' : 'Пн-Пт: 9:00 - 18:00' },
+    { icon: Mail, label: t.contact.info.email, value: 'info@vesuviodigital.com', href: 'mailto:info@vesuviodigital.com' },
+    { icon: MapPin, label: t.contact.info.address, value: 'Napoli, Italia', href: null },
+    { icon: Clock, label: t.contact.info.hours, value: language === 'it' ? 'Lun-Ven: 9:00 - 18:00' : language === 'en' ? 'Mon-Fri: 9:00 AM - 6:00 PM' : 'Пн-Пт: 9:00 - 18:00', href: null },
   ];
 
   return (
@@ -188,28 +235,15 @@ const Contact = () => {
                     />
                   </div>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t.contact.form.phone}
-                    </label>
-                    <Input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-muted border-border"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t.contact.form.company}
-                    </label>
-                    <Input
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="bg-muted border-border"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t.contact.form.company}
+                  </label>
+                  <Input
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="bg-muted border-border"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
@@ -256,27 +290,20 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">{item.label}</p>
-                        <p className="text-foreground">{item.value}</p>
+                        {item.href ? (
+                          <a href={item.href} className="text-foreground hover:text-primary transition-colors">
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="text-foreground">{item.value}</p>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
-
-                {/* WhatsApp */}
-                <div className="mt-6 pt-6 border-t border-border">
-                  <a
-                    href="https://wa.me/390612345678"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
               </div>
 
-              {/* Booking Placeholder */}
+              {/* Booking CTA */}
               <div className="glass-card rounded-2xl p-8">
                 <h3 className="font-display text-xl font-semibold text-foreground mb-4">
                   {t.cta.bookCall}
@@ -288,27 +315,11 @@ const Contact = () => {
                     ? '30 minutes of free strategy. Choose an available slot.'
                     : '30 минут бесплатной стратегии. Выберите доступный слот.'}
                 </p>
-                <div className="p-8 border border-dashed border-border rounded-lg text-center">
-                  <p className="text-muted-foreground text-sm">
-                    [Placeholder: Calendario HighLevel / Calendly]
-                  </p>
-                </div>
-              </div>
-
-              {/* Free Audit CTA */}
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 border border-primary/20">
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                  {t.cta.freeAudit}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  {language === 'it'
-                    ? 'Ricevi un\'analisi gratuita del tuo attuale stack marketing e un piano d\'azione personalizzato.'
-                    : language === 'en'
-                    ? 'Get a free analysis of your current marketing stack and a personalized action plan.'
-                    : 'Получите бесплатный анализ вашего маркетингового стека и персональный план действий.'}
-                </p>
-                <Button variant="lava" className="w-full">
-                  {t.cta.freeAudit}
+                <Button variant="hero" size="lg" className="w-full" asChild>
+                  <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                    {t.cta.bookCall}
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </a>
                 </Button>
               </div>
             </motion.div>
@@ -316,8 +327,90 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Audit Form Section */}
+      <section id="audit" className="section-padding bg-charcoal-light">
+        <div className="container-custom">
+          <SectionHeading title={t.audit.title} subtitle={t.audit.subtitle} />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 border border-primary/20">
+              <form onSubmit={handleAuditSubmit} className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t.contact.form.name} *
+                    </label>
+                    <Input
+                      required
+                      value={auditFormData.name}
+                      onChange={(e) => setAuditFormData({ ...auditFormData, name: e.target.value })}
+                      className="bg-background border-border"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t.contact.form.email} *
+                    </label>
+                    <Input
+                      type="email"
+                      required
+                      value={auditFormData.email}
+                      onChange={(e) => setAuditFormData({ ...auditFormData, email: e.target.value })}
+                      className="bg-background border-border"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {language === 'it' ? 'Sito Web' : language === 'en' ? 'Website' : 'Сайт'}
+                  </label>
+                  <Input
+                    type="url"
+                    placeholder="https://"
+                    value={auditFormData.website}
+                    onChange={(e) => setAuditFormData({ ...auditFormData, website: e.target.value })}
+                    className="bg-background border-border"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {language === 'it' ? 'Obiettivi principali' : language === 'en' ? 'Main goals' : 'Основные цели'} *
+                  </label>
+                  <Textarea
+                    required
+                    rows={4}
+                    placeholder={language === 'it' 
+                      ? 'Descrivi brevemente cosa vorresti ottenere...'
+                      : language === 'en'
+                      ? 'Briefly describe what you would like to achieve...'
+                      : 'Кратко опишите, чего вы хотели бы достичь...'}
+                    value={auditFormData.goals}
+                    onChange={(e) => setAuditFormData({ ...auditFormData, goals: e.target.value })}
+                    className="bg-background border-border resize-none"
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  variant="lava" 
+                  size="lg" 
+                  className="w-full"
+                  disabled={isAuditSubmitting}
+                >
+                  {isAuditSubmitting ? '...' : t.cta.freeAudit}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="section-padding bg-charcoal-light">
+      <section className="section-padding">
         <div className="container-custom">
           <SectionHeading title={t.faq.title} />
           <div className="max-w-3xl mx-auto">
