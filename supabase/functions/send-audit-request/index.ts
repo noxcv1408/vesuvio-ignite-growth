@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
+import { Resend } from "https://esm.sh/resend@2.0.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -47,11 +47,10 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const smtpUser = Deno.env.get("SMTP_USER");
-    const smtpPass = Deno.env.get("SMTP_PASS");
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
 
-    if (!smtpUser || !smtpPass) {
-      console.error("SMTP credentials not configured");
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY not configured");
       return new Response(
         JSON.stringify({ error: "Email service not configured" }),
         {
@@ -61,18 +60,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Create SMTP client for Zoho using SSL on port 465
-    const client = new SMTPClient({
-      connection: {
-        hostname: "smtppro.zoho.eu",
-        port: 465,
-        tls: true,
-        auth: {
-          username: smtpUser,
-          password: smtpPass,
-        },
-      },
-    });
+    const resend = new Resend(resendApiKey);
 
     // Build email content
     const emailContent = `
@@ -91,18 +79,27 @@ ${goals}
 Inviato dal form di Vesuvio Digital
     `.trim();
 
-    // Send email
-    await client.send({
-      from: smtpUser,
-      to: "info@vesuviodigital.com",
+    // Send email using Resend
+    const { data, error } = await resend.emails.send({
+      from: "Vesuvio Digital <onboarding@resend.dev>",
+      to: ["info@vesuviodigital.com"],
       subject: `🔥 Nuova Richiesta Audit - ${name}`,
-      content: emailContent,
-      replyTo: email,
+      text: emailContent,
+      reply_to: email,
     });
 
-    await client.close();
+    if (error) {
+      console.error("Resend error:", error);
+      return new Response(
+        JSON.stringify({ error: error.message || "Failed to send email" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
-    console.log("Audit request email sent successfully:", { name, email });
+    console.log("Audit request email sent successfully:", { name, email, id: data?.id });
 
     return new Response(
       JSON.stringify({ success: true, message: "Audit request sent successfully" }),
