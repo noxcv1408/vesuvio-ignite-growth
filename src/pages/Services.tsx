@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Target, Zap, Star, Settings, BarChart3, Clock, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,302 +12,107 @@ import {
 } from "@/components/ui/accordion";
 
 const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+const WHATSAPP_AUDIT_URL = 'https://wa.me/393314054922?text=Buongiorno%21%20Vorrei%20richiedere%20un%20audit%20gratuito.';
 
-const serviceCategories = {
-  it: [
-    {
-      id: 'lead-generation',
-      icon: Target,
-      title: 'Lead Generation',
-      intro: 'Strategie multi-canale per attrarre prospect qualificati e pronti all\'acquisto.',
-      deliverables: [
-        'Campagne Meta Ads (Facebook & Instagram)',
-        'Campagne Google Ads (Search, Display, YouTube)',
-        'Landing page ad alta conversione',
-        'Lead magnet e contenuti gated',
-        'Form ottimizzati e A/B testing',
-        'Integrazione CRM e nurturing automatico',
-      ],
-      timeline: '2-4 settimane per setup iniziale',
-    },
-    {
-      id: 'sales-automation',
-      icon: Zap,
-      title: 'Automazione Vendite',
-      intro: 'Workflow automatici che convertono lead in clienti 24/7, senza intervento manuale.',
-      deliverables: [
-        'Sequenze email automatiche',
-        'SMS follow-up e reminder',
-        'Pipeline di vendita strutturate',
-        'Scoring lead automatico',
-        'Notifiche real-time al team vendite',
-        'Integrazione calendario e prenotazioni',
-      ],
-      timeline: '3-6 settimane per implementazione completa',
-    },
-    {
-      id: 'retention',
-      icon: Star,
-      title: 'Fidelizzazione & Reputazione',
-      intro: 'Sistemi per massimizzare il lifetime value e costruire una reputazione a 5 stelle.',
-      deliverables: [
-        'Campagne di riattivazione clienti',
-        'Programmi referral automatizzati',
-        'Richieste recensioni automatiche',
-        'Gestione e risposta recensioni',
-        'Survey NPS e feedback loop',
-        'Widget recensioni per sito web',
-      ],
-      timeline: '2-3 settimane per setup',
-    },
-    {
-      id: 'websites-funnels',
-      icon: Settings,
-      title: 'Siti Web & Funnel',
-      intro: 'Pagine e funnel ottimizzati per conversioni, velocità e brand experience.',
-      deliverables: [
-        'Siti web aziendali responsive',
-        'Landing page campagne specifiche',
-        'Funnel multi-step',
-        'Checkout e pagamenti integrati',
-        'Blog e content hub',
-        'Form, survey e quiz interattivi',
-      ],
-      timeline: '2-6 settimane a seconda della complessità',
-    },
-    {
-      id: 'analytics',
-      icon: BarChart3,
-      title: 'Analytics & Ottimizzazione',
-      intro: 'Dashboard KPI e ottimizzazione continua basata sui dati per performance crescenti.',
-      deliverables: [
-        'Dashboard centralizzata KPI',
-        'Tracking conversioni avanzato',
-        'Report settimanali/mensili',
-        'A/B testing continuo',
-        'Analisi attribution multi-touch',
-        'Consulenza ottimizzazione',
-      ],
-      timeline: 'Setup 1-2 settimane + ottimizzazione continua',
-    },
-  ],
-  en: [
-    {
-      id: 'lead-generation',
-      icon: Target,
-      title: 'Lead Generation',
-      intro: 'Multi-channel strategies to attract qualified prospects ready to buy.',
-      deliverables: [
-        'Meta Ads campaigns (Facebook & Instagram)',
-        'Google Ads campaigns (Search, Display, YouTube)',
-        'High-converting landing pages',
-        'Lead magnets and gated content',
-        'Optimized forms and A/B testing',
-        'CRM integration and automated nurturing',
-      ],
-      timeline: '2-4 weeks for initial setup',
-    },
-    {
-      id: 'sales-automation',
-      icon: Zap,
-      title: 'Sales Automation',
-      intro: 'Automated workflows that convert leads to customers 24/7, hands-free.',
-      deliverables: [
-        'Automated email sequences',
-        'SMS follow-up and reminders',
-        'Structured sales pipelines',
-        'Automated lead scoring',
-        'Real-time sales team notifications',
-        'Calendar integration and bookings',
-      ],
-      timeline: '3-6 weeks for complete implementation',
-    },
-    {
-      id: 'retention',
-      icon: Star,
-      title: 'Retention & Reputation',
-      intro: 'Systems to maximize lifetime value and build a 5-star reputation.',
-      deliverables: [
-        'Customer reactivation campaigns',
-        'Automated referral programs',
-        'Automated review requests',
-        'Review management and responses',
-        'NPS surveys and feedback loops',
-        'Website review widgets',
-      ],
-      timeline: '2-3 weeks for setup',
-    },
-    {
-      id: 'websites-funnels',
-      icon: Settings,
-      title: 'Websites & Funnels',
-      intro: 'Pages and funnels optimized for conversions, speed, and brand experience.',
-      deliverables: [
-        'Responsive business websites',
-        'Campaign-specific landing pages',
-        'Multi-step funnels',
-        'Integrated checkout and payments',
-        'Blog and content hub',
-        'Forms, surveys and interactive quizzes',
-      ],
-      timeline: '2-6 weeks depending on complexity',
-    },
-    {
-      id: 'analytics',
-      icon: BarChart3,
-      title: 'Analytics & Optimization',
-      intro: 'KPI dashboards and data-driven continuous optimization for growing performance.',
-      deliverables: [
-        'Centralized KPI dashboard',
-        'Advanced conversion tracking',
-        'Weekly/monthly reports',
-        'Continuous A/B testing',
-        'Multi-touch attribution analysis',
-        'Optimization consulting',
-      ],
-      timeline: 'Setup 1-2 weeks + ongoing optimization',
-    },
-  ],
-  ru: [
-    {
-      id: 'lead-generation',
-      icon: Target,
-      title: 'Лидогенерация',
-      intro: 'Мультиканальные стратегии для привлечения квалифицированных клиентов.',
-      deliverables: [
-        'Кампании Meta Ads (Facebook & Instagram)',
-        'Кампании Google Ads (Search, Display, YouTube)',
-        'Высококонверсионные лендинги',
-        'Лид-магниты и закрытый контент',
-        'Оптимизированные формы и A/B тесты',
-        'Интеграция CRM и автоматический nurturing',
-      ],
-      timeline: '2-4 недели для начальной настройки',
-    },
-    {
-      id: 'sales-automation',
-      icon: Zap,
-      title: 'Автоматизация Продаж',
-      intro: 'Автоматические воронки, которые конвертируют лиды в клиентов 24/7.',
-      deliverables: [
-        'Автоматические email-последовательности',
-        'SMS follow-up и напоминания',
-        'Структурированные пайплайны продаж',
-        'Автоматический скоринг лидов',
-        'Уведомления в реальном времени',
-        'Интеграция календаря и бронирований',
-      ],
-      timeline: '3-6 недель для полной реализации',
-    },
-    {
-      id: 'retention',
-      icon: Star,
-      title: 'Удержание & Репутация',
-      intro: 'Системы для максимизации LTV и построения 5-звездочной репутации.',
-      deliverables: [
-        'Кампании реактивации клиентов',
-        'Автоматические реферальные программы',
-        'Автоматические запросы отзывов',
-        'Управление и ответы на отзывы',
-        'NPS опросы и обратная связь',
-        'Виджеты отзывов для сайта',
-      ],
-      timeline: '2-3 недели для настройки',
-    },
-    {
-      id: 'websites-funnels',
-      icon: Settings,
-      title: 'Сайты & Воронки',
-      intro: 'Страницы и воронки, оптимизированные для конверсий и бренда.',
-      deliverables: [
-        'Адаптивные бизнес-сайты',
-        'Лендинги для кампаний',
-        'Многошаговые воронки',
-        'Интегрированные платежи',
-        'Блог и контент-хаб',
-        'Формы, опросы и интерактивные квизы',
-      ],
-      timeline: '2-6 недель в зависимости от сложности',
-    },
-    {
-      id: 'analytics',
-      icon: BarChart3,
-      title: 'Аналитика & Оптимизация',
-      intro: 'Дашборды KPI и постоянная оптимизация на основе данных.',
-      deliverables: [
-        'Централизованный дашборд KPI',
-        'Расширенное отслеживание конверсий',
-        'Еженедельные/ежемесячные отчеты',
-        'Постоянное A/B тестирование',
-        'Multi-touch атрибуция',
-        'Консалтинг по оптимизации',
-      ],
-      timeline: 'Настройка 1-2 недели + постоянная оптимизация',
-    },
-  ],
-};
+const serviceCategories = [
+  {
+    id: 'lead-generation',
+    icon: Target,
+    title: 'Lead Generation',
+    intro: "Strategie multi-canale per attrarre prospect qualificati e pronti all'acquisto.",
+    deliverables: [
+      'Campagne Meta Ads (Facebook & Instagram)',
+      'Campagne Google Ads (Search, Display, YouTube)',
+      'Landing page ad alta conversione',
+      'Lead magnet e contenuti gated',
+      'Form ottimizzati e A/B testing',
+      'Integrazione CRM e nurturing automatico',
+    ],
+    timeline: '2-4 settimane per setup iniziale',
+  },
+  {
+    id: 'sales-automation',
+    icon: Zap,
+    title: 'Automazione Vendite',
+    intro: 'Workflow automatici che convertono lead in clienti 24/7, senza intervento manuale.',
+    deliverables: [
+      'Sequenze email automatiche',
+      'SMS follow-up e reminder',
+      'Pipeline di vendita strutturate',
+      'Scoring lead automatico',
+      'Notifiche real-time al team vendite',
+      'Integrazione calendario e prenotazioni',
+    ],
+    timeline: '3-6 settimane per implementazione completa',
+  },
+  {
+    id: 'retention',
+    icon: Star,
+    title: 'Fidelizzazione & Reputazione',
+    intro: 'Sistemi per massimizzare il lifetime value e costruire una reputazione a 5 stelle.',
+    deliverables: [
+      'Campagne di riattivazione clienti',
+      'Programmi referral automatizzati',
+      'Richieste recensioni automatiche',
+      'Gestione e risposta recensioni',
+      'Survey NPS e feedback loop',
+      'Widget recensioni per sito web',
+    ],
+    timeline: '2-3 settimane per setup',
+  },
+  {
+    id: 'websites-funnels',
+    icon: Settings,
+    title: 'Siti Web & Funnel',
+    intro: 'Pagine e funnel ottimizzati per conversioni, velocità e brand experience.',
+    deliverables: [
+      'Siti web aziendali responsive',
+      'Landing page campagne specifiche',
+      'Funnel multi-step',
+      'Checkout e pagamenti integrati',
+      'Blog e content hub',
+      'Form, survey e quiz interattivi',
+    ],
+    timeline: '2-6 settimane a seconda della complessità',
+  },
+  {
+    id: 'analytics',
+    icon: BarChart3,
+    title: 'Analytics & Ottimizzazione',
+    intro: 'Dashboard KPI e ottimizzazione continua basata sui dati per performance crescenti.',
+    deliverables: [
+      'Dashboard centralizzata KPI',
+      'Tracking conversioni avanzato',
+      'Report settimanali/mensili',
+      'A/B testing continuo',
+      'Analisi attribution multi-touch',
+      'Consulenza ottimizzazione',
+    ],
+    timeline: 'Setup 1-2 settimane + ottimizzazione continua',
+  },
+];
 
-const faqData = {
-  it: [
-    {
-      question: 'Quanto costa lavorare con Vesuvio?',
-      answer: 'I nostri progetti partono da €2.000/mese per servizi gestiti. Offriamo anche progetti una tantum per setup specifici. Prenota una call per un preventivo personalizzato.',
-    },
-    {
-      question: 'Quanto tempo serve per vedere i primi risultati?',
-      answer: 'Dipende dal servizio. Le campagne paid possono generare lead in 7-14 giorni. I sistemi di automazione completi richiedono 4-8 settimane per l\'implementazione.',
-    },
-    {
-      question: 'Lavorate con aziende del mio settore?',
-      answer: 'Lavoriamo con aziende B2B e B2C in diversi settori: healthcare, e-commerce, servizi professionali, SaaS, real estate e altri. Prenota una call per valutare il fit.',
-    },
-    {
-      question: 'Cosa include l\'audit gratuito?',
-      answer: 'Analizziamo il tuo attuale stack marketing, identifichiamo le opportunità di automazione e forniamo un piano d\'azione con priorità chiare e ROI stimato.',
-    },
-  ],
-  en: [
-    {
-      question: 'How much does it cost to work with Vesuvio?',
-      answer: 'Our projects start from €2,000/month for managed services. We also offer one-time projects for specific setups. Book a call for a custom quote.',
-    },
-    {
-      question: 'How long until I see results?',
-      answer: 'It depends on the service. Paid campaigns can generate leads in 7-14 days. Complete automation systems require 4-8 weeks for implementation.',
-    },
-    {
-      question: 'Do you work with companies in my industry?',
-      answer: 'We work with B2B and B2C companies across sectors: healthcare, e-commerce, professional services, SaaS, real estate and more. Book a call to assess fit.',
-    },
-    {
-      question: 'What does the free audit include?',
-      answer: 'We analyze your current marketing stack, identify automation opportunities, and provide an action plan with clear priorities and estimated ROI.',
-    },
-  ],
-  ru: [
-    {
-      question: 'Сколько стоит работа с Vesuvio?',
-      answer: 'Наши проекты начинаются от €2,000/месяц за управляемые услуги. Также предлагаем разовые проекты для конкретных настроек. Запишитесь на звонок для индивидуального предложения.',
-    },
-    {
-      question: 'Когда я увижу первые результаты?',
-      answer: 'Зависит от услуги. Платные кампании могут генерировать лиды за 7-14 дней. Полные системы автоматизации требуют 4-8 недель для внедрения.',
-    },
-    {
-      question: 'Вы работаете с компаниями в моей отрасли?',
-      answer: 'Мы работаем с B2B и B2C компаниями в разных секторах: здравоохранение, e-commerce, профессиональные услуги, SaaS, недвижимость и другие.',
-    },
-    {
-      question: 'Что включает бесплатный аудит?',
-      answer: 'Мы анализируем ваш текущий маркетинговый стек, определяем возможности автоматизации и предоставляем план действий с приоритетами и оценкой ROI.',
-    },
-  ],
-};
+const faqData = [
+  {
+    question: 'Quanto costa lavorare con Vesuvio?',
+    answer: "I nostri progetti partono da €2.000/mese per servizi gestiti. Offriamo anche progetti una tantum per setup specifici. Prenota una call per un preventivo personalizzato.",
+  },
+  {
+    question: 'Quanto tempo serve per vedere i primi risultati?',
+    answer: "Dipende dal servizio. Le campagne paid possono generare lead in 7-14 giorni. I sistemi di automazione completi richiedono 4-8 settimane per l'implementazione.",
+  },
+  {
+    question: 'Lavorate con aziende del mio settore?',
+    answer: 'Lavoriamo con aziende B2B e B2C in diversi settori: healthcare, e-commerce, servizi professionali, SaaS, real estate e altri. Prenota una call per valutare il fit.',
+  },
+  {
+    question: "Cosa include l'audit gratuito?",
+    answer: "Analizziamo il tuo attuale stack marketing, identifichiamo le opportunità di automazione e forniamo un piano d'azione con priorità chiare e ROI stimato.",
+  },
+];
 
 const Services = () => {
-  const { language, t } = useLanguage();
-  const services = serviceCategories[language];
-  const faqs = faqData[language];
+  const { t } = useLanguage();
 
   return (
     <Layout>
@@ -352,7 +156,7 @@ const Services = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="space-y-12">
-            {services.map((service, index) => (
+            {serviceCategories.map((service, index) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -377,7 +181,7 @@ const Services = () => {
                   </div>
                   <div className="lg:w-2/3">
                     <h3 className="font-semibold text-foreground mb-4">
-                      {language === 'it' ? 'Cosa include:' : language === 'en' ? 'What\'s included:' : 'Что включено:'}
+                      Cosa include:
                     </h3>
                     <ul className="grid md:grid-cols-2 gap-3">
                       {service.deliverables.map((item, i) => (
@@ -389,7 +193,9 @@ const Services = () => {
                     </ul>
                     <div className="mt-6">
                       <Button variant="lavaOutline" asChild>
-                        <Link to="/contact">{t.cta.getStarted}</Link>
+                        <a href={WHATSAPP_AUDIT_URL} target="_blank" rel="noopener noreferrer">
+                          {t.cta.getStarted}
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -406,7 +212,7 @@ const Services = () => {
           <SectionHeading title={t.faq.title} />
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="space-y-4">
-              {faqs.map((faq, index) => (
+              {faqData.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
@@ -441,7 +247,9 @@ const Services = () => {
                 </a>
               </Button>
               <Button variant="dark" size="xl" asChild>
-                <Link to="/contact#audit">{t.cta.freeAudit}</Link>
+                <a href={WHATSAPP_AUDIT_URL} target="_blank" rel="noopener noreferrer">
+                  {t.cta.freeAudit}
+                </a>
               </Button>
             </div>
           </div>

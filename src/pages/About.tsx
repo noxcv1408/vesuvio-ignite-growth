@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Target, Zap, TrendingUp, Users, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,119 +9,45 @@ import AnimatedCard from '@/components/shared/AnimatedCard';
 const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
 
 const aboutContent = {
-  it: {
-    hero: {
-      title: 'Chi Siamo',
-      subtitle: 'Energia vulcanica per la crescita del tuo business. Siamo Vesuvio, l\'agenzia digitale di Napoli che trasforma le tue ambizioni in risultati misurabili.',
-    },
-    story: {
-      title: 'La Nostra Storia',
-      content: [
-        'Vesuvio nasce dalla convinzione che il marketing digitale debba generare risultati, non solo report.',
-        'Dopo anni di esperienza in agenzie internazionali e startup in rapida crescita, abbiamo fondato Vesuvio con una missione chiara: costruire sistemi di marketing e vendita che funzionano come macchine automatiche di acquisizione clienti.',
-        'Dal nostro quartier generale a Napoli, serviamo clienti in tutta Italia e in Europa, con un focus maniacale su performance e ROI.',
-      ],
-    },
-    mission: {
-      title: 'La Nostra Missione',
-      content: 'Democratizzare l\'accesso a sistemi di marketing automation di livello enterprise. Ogni business merita strumenti potenti e strategie basate sui dati.',
-    },
-    values: {
-      title: 'I Nostri Valori',
-      items: [
-        { icon: Target, title: 'Risultati Misurabili', desc: 'Ogni azione è tracciata. Ogni euro investito è accountable.' },
-        { icon: Zap, title: 'Velocità di Esecuzione', desc: 'Go-live in settimane, non mesi. Il tempo è denaro.' },
-        { icon: TrendingUp, title: 'Ottimizzazione Continua', desc: 'Non ci fermiamo al lancio. Iteriamo e miglioriamo sempre.' },
-        { icon: Users, title: 'Partnership, Non Fornitura', desc: 'Siamo parte del tuo team, non un fornitore esterno.' },
-      ],
-    },
-    process: {
-      title: 'Il Nostro Processo',
-      steps: [
-        { num: '01', title: 'Discovery', desc: 'Analizziamo il tuo business, il mercato e gli obiettivi.' },
-        { num: '02', title: 'Strategia', desc: 'Definiamo il piano d\'azione con KPI chiari e timeline.' },
-        { num: '03', title: 'Implementazione', desc: 'Costruiamo e lanciamo i sistemi rapidamente.' },
-        { num: '04', title: 'Ottimizzazione', desc: 'Monitoriamo, testiamo e miglioriamo continuamente.' },
-      ],
-    },
+  hero: {
+    title: 'Chi Siamo',
+    subtitle: "Energia vulcanica per la crescita del tuo business. Siamo Vesuvio, l'agenzia digitale di Napoli che trasforma le tue ambizioni in risultati misurabili.",
   },
-  en: {
-    hero: {
-      title: 'About Us',
-      subtitle: 'Volcanic energy for your business growth. We are Vesuvio, the Naples-based digital agency that transforms your ambitions into measurable results.',
-    },
-    story: {
-      title: 'Our Story',
-      content: [
-        'Vesuvio was born from the belief that digital marketing should generate results, not just reports.',
-        'After years of experience in international agencies and fast-growing startups, we founded Vesuvio with a clear mission: to build marketing and sales systems that work like automatic customer acquisition machines.',
-        'From our Naples headquarters, we serve clients across Italy and Europe, with a maniacal focus on performance and ROI.',
-      ],
-    },
-    mission: {
-      title: 'Our Mission',
-      content: 'Democratize access to enterprise-level marketing automation systems. Every business deserves powerful tools and data-driven strategies.',
-    },
-    values: {
-      title: 'Our Values',
-      items: [
-        { icon: Target, title: 'Measurable Results', desc: 'Every action is tracked. Every euro invested is accountable.' },
-        { icon: Zap, title: 'Speed of Execution', desc: 'Go-live in weeks, not months. Time is money.' },
-        { icon: TrendingUp, title: 'Continuous Optimization', desc: 'We don\'t stop at launch. We iterate and improve always.' },
-        { icon: Users, title: 'Partnership, Not Vendor', desc: 'We\'re part of your team, not an external supplier.' },
-      ],
-    },
-    process: {
-      title: 'Our Process',
-      steps: [
-        { num: '01', title: 'Discovery', desc: 'We analyze your business, market, and goals.' },
-        { num: '02', title: 'Strategy', desc: 'We define the action plan with clear KPIs and timeline.' },
-        { num: '03', title: 'Implementation', desc: 'We build and launch systems rapidly.' },
-        { num: '04', title: 'Optimization', desc: 'We monitor, test, and continuously improve.' },
-      ],
-    },
+  story: {
+    title: 'La Nostra Storia',
+    content: [
+      'Vesuvio nasce dalla convinzione che il marketing digitale debba generare risultati, non solo report.',
+      'Dopo anni di esperienza in agenzie internazionali e startup in rapida crescita, abbiamo fondato Vesuvio con una missione chiara: costruire sistemi di marketing e vendita che funzionano come macchine automatiche di acquisizione clienti.',
+      'Dal nostro quartier generale a Napoli, serviamo clienti in tutta Italia e in Europa, con un focus maniacale su performance e ROI.',
+    ],
   },
-  ru: {
-    hero: {
-      title: 'О Нас',
-      subtitle: 'Вулканическая энергия для роста вашего бизнеса. Мы Vesuvio, цифровое агентство из Неаполя, которое превращает ваши амбиции в измеримые результаты.',
-    },
-    story: {
-      title: 'Наша История',
-      content: [
-        'Vesuvio родился из убеждения, что digital маркетинг должен генерировать результаты, а не только отчеты.',
-        'После многих лет опыта в международных агентствах и быстрорастущих стартапах мы основали Vesuvio с четкой миссией: создавать системы маркетинга и продаж, которые работают как автоматические машины привлечения клиентов.',
-        'Из нашей штаб-квартиры в Неаполе мы обслуживаем клиентов по всей Италии и Европе, с маниакальным фокусом на performance и ROI.',
-      ],
-    },
-    mission: {
-      title: 'Наша Миссия',
-      content: 'Демократизировать доступ к системам маркетинговой автоматизации enterprise-уровня. Каждый бизнес заслуживает мощных инструментов и стратегий на основе данных.',
-    },
-    values: {
-      title: 'Наши Ценности',
-      items: [
-        { icon: Target, title: 'Измеримые Результаты', desc: 'Каждое действие отслеживается. Каждый евро подотчетен.' },
-        { icon: Zap, title: 'Скорость Исполнения', desc: 'Запуск за недели, не месяцы. Время — деньги.' },
-        { icon: TrendingUp, title: 'Постоянная Оптимизация', desc: 'Мы не останавливаемся на запуске. Мы всегда улучшаем.' },
-        { icon: Users, title: 'Партнерство, Не Поставка', desc: 'Мы часть вашей команды, не внешний поставщик.' },
-      ],
-    },
-    process: {
-      title: 'Наш Процесс',
-      steps: [
-        { num: '01', title: 'Discovery', desc: 'Анализируем ваш бизнес, рынок и цели.' },
-        { num: '02', title: 'Стратегия', desc: 'Определяем план действий с четкими KPI и таймлайном.' },
-        { num: '03', title: 'Реализация', desc: 'Строим и запускаем системы быстро.' },
-        { num: '04', title: 'Оптимизация', desc: 'Мониторим, тестируем и постоянно улучшаем.' },
-      ],
-    },
+  mission: {
+    title: 'La Nostra Missione',
+    content: "Democratizzare l'accesso a sistemi di marketing automation di livello enterprise. Ogni business merita strumenti potenti e strategie basate sui dati.",
+  },
+  values: {
+    title: 'I Nostri Valori',
+    items: [
+      { icon: Target, title: 'Risultati Misurabili', desc: 'Ogni azione è tracciata. Ogni euro investito è accountable.' },
+      { icon: Zap, title: 'Velocità di Esecuzione', desc: 'Go-live in settimane, non mesi. Il tempo è denaro.' },
+      { icon: TrendingUp, title: 'Ottimizzazione Continua', desc: 'Non ci fermiamo al lancio. Iteriamo e miglioriamo sempre.' },
+      { icon: Users, title: 'Partnership, Non Fornitura', desc: 'Siamo parte del tuo team, non un fornitore esterno.' },
+    ],
+  },
+  process: {
+    title: 'Il Nostro Processo',
+    steps: [
+      { num: '01', title: 'Discovery', desc: 'Analizziamo il tuo business, il mercato e gli obiettivi.' },
+      { num: '02', title: 'Strategia', desc: "Definiamo il piano d'azione con KPI chiari e timeline." },
+      { num: '03', title: 'Implementazione', desc: 'Costruiamo e lanciamo i sistemi rapidamente.' },
+      { num: '04', title: 'Ottimizzazione', desc: 'Monitoriamo, testiamo e miglioriamo continuamente.' },
+    ],
   },
 };
 
 const About = () => {
-  const { language, t } = useLanguage();
-  const content = aboutContent[language];
+  const { t } = useLanguage();
+  const content = aboutContent;
 
   return (
     <Layout>

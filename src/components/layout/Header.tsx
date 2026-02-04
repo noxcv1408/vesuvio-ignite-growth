@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+const WHATSAPP_AUDIT_URL = 'https://wa.me/393314054922?text=Buongiorno%21%20Vorrei%20richiedere%20un%20audit%20gratuito.';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +26,6 @@ const Header = () => {
     { href: '/', label: t.nav.home },
     { href: '/services', label: t.nav.services },
     { href: '/about', label: t.nav.about },
-    { href: '/contact', label: t.nav.contact },
   ];
 
   return (
@@ -62,7 +62,9 @@ const Header = () => {
         {/* Right Side - CTAs */}
         <div className="hidden lg:flex items-center gap-4">
           <Button variant="lavaOutline" size="sm" asChild>
-            <Link to="/contact#audit">{t.cta.freeAudit}</Link>
+            <a href={WHATSAPP_AUDIT_URL} target="_blank" rel="noopener noreferrer">
+              {t.cta.freeAudit}
+            </a>
           </Button>
           <Button variant="lava" size="sm" asChild>
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
@@ -107,9 +109,14 @@ const Header = () => {
 
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 <Button variant="lavaOutline" asChild>
-                  <Link to="/contact#audit" onClick={() => setIsMobileMenuOpen(false)}>
+                  <a
+                    href={WHATSAPP_AUDIT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     {t.cta.freeAudit}
-                  </Link>
+                  </a>
                 </Button>
                 <Button variant="lava" asChild>
                   <a

@@ -6,9 +6,9 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
 import AnimatedCard from '@/components/shared/AnimatedCard';
-import RequestAuditDialog from '@/components/shared/RequestAuditDialog';
 
 const BOOKING_URL = 'https://calendar.app.google/Pf3jmxHgmtEtdKGX9';
+const WHATSAPP_AUDIT_URL = 'https://wa.me/393314054922?text=Buongiorno%21%20Vorrei%20richiedere%20un%20audit%20gratuito.';
 
 // Hero Section
 const HeroSection = () => {
@@ -46,7 +46,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20">
-              🔥 Digital Agency • Napoli, Italia
+              Digital Agency - Napoli, Italia
             </span>
           </motion.div>
 
@@ -83,13 +83,11 @@ const HeroSection = () => {
               </a>
             </Button>
 
-            <RequestAuditDialog
-              trigger={
-                <Button variant="heroSecondary" size="xl">
-                  {t.cta.freeAudit}
-                </Button>
-              }
-            />
+            <Button variant="heroSecondary" size="xl" asChild>
+              <a href={WHATSAPP_AUDIT_URL} target="_blank" rel="noopener noreferrer">
+                {t.cta.freeAudit}
+              </a>
+            </Button>
           </motion.div>
         </div>
       </div>
@@ -278,13 +276,11 @@ const FinalCtaSection = () => {
               </a>
             </Button>
 
-            <RequestAuditDialog
-              trigger={
-                <Button variant="dark" size="xl">
-                  {t.cta.freeAudit}
-                </Button>
-              }
-            />
+            <Button variant="dark" size="xl" asChild>
+              <a href={WHATSAPP_AUDIT_URL} target="_blank" rel="noopener noreferrer">
+                {t.cta.freeAudit}
+              </a>
+            </Button>
           </motion.div>
         </div>
       </div>

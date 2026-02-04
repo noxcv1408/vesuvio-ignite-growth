@@ -4,7 +4,6 @@ export const translations = {
     services: 'Servizi',
     caseStudies: 'Case Studies',
     about: 'Chi Siamo',
-    contact: 'Contatti',
   },
   cta: {
     bookCall: 'Prenota una Call',
@@ -79,29 +78,8 @@ export const translations = {
     cookies: 'Cookie Policy',
     rights: 'Tutti i diritti riservati.',
   },
-  contact: {
-    title: 'Parliamo del Tuo Progetto',
-    subtitle: 'Compila il form o prenota direttamente una call strategica',
-    form: {
-      name: 'Nome e Cognome',
-      email: 'Email',
-      phone: 'Telefono',
-      company: 'Azienda',
-      message: 'Come possiamo aiutarti?',
-      submit: 'Invia Richiesta',
-    },
-    info: {
-      email: 'Email',
-      address: 'Indirizzo',
-      hours: 'Orari',
-    },
-  },
   faq: {
     title: 'Domande Frequenti',
-  },
-  audit: {
-    title: 'Richiedi Audit Gratuito',
-    subtitle: 'Compila il form per ricevere un\'analisi gratuita del tuo marketing stack.',
   },
 };
 

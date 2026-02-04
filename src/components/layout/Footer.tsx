@@ -1,41 +1,30 @@
 import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import vesuvioLogo from '@/assets/vesuvio-logo.png';
+
 const Footer = () => {
-  const {
-    t
-  } = useLanguage();
-  const quickLinks = [{
-    href: '/',
-    label: t.nav.home
-  }, {
-    href: '/services',
-    label: t.nav.services
-  }, {
-    href: '/about',
-    label: t.nav.about
-  }, {
-    href: '/contact',
-    label: t.nav.contact
-  }];
-  const legalLinks = [{
-    href: '/privacy',
-    label: t.footer.privacy
-  }, {
-    href: '/terms',
-    label: t.footer.terms
-  }, {
-    href: '/cookies',
-    label: t.footer.cookies
-  }];
-  return <footer className="bg-charcoal border-t border-border">
+  const { t } = useLanguage();
+
+  const quickLinks = [
+    { href: '/', label: t.nav.home },
+    { href: '/services', label: t.nav.services },
+    { href: '/about', label: t.nav.about },
+  ];
+
+  const legalLinks = [
+    { href: '/privacy', label: t.footer.privacy },
+    { href: '/terms', label: t.footer.terms },
+    { href: '/cookies', label: t.footer.cookies },
+  ];
+
+  return (
+    <footer className="bg-charcoal border-t border-border">
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-6">
-              
+
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               {t.footer.description}
@@ -46,11 +35,13 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-6">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
-              {quickLinks.map(link => <li key={link.href}>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
                   <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                     {link.label}
                   </Link>
-                </li>)}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -75,11 +66,13 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-6">{t.footer.legal}</h4>
             <ul className="space-y-3">
-              {legalLinks.map(link => <li key={link.href}>
+              {legalLinks.map((link) => (
+                <li key={link.href}>
                   <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                     {link.label}
                   </Link>
-                </li>)}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -92,10 +85,12 @@ const Footer = () => {
             © {new Date().getFullYear()} Vesuvio Digital. {t.footer.rights}
           </p>
           <p className="text-muted-foreground text-xs">
-            Napoli, Italia 🇮🇹
+            Napoli, Italia
           </p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
