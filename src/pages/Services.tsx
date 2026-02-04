@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/xrWBbuxYBZ3hnjLA9';
 const WHATSAPP_AUDIT_URL = 'https://wa.me/393314054922?text=Buongiorno%21%20Vorrei%20richiedere%20un%20audit%20gratuito.';
 
 const serviceCategories = [
@@ -142,7 +142,7 @@ const Services = () => {
               transition={{ delay: 0.2 }}
             >
               <Button variant="hero" size="lg" asChild>
-                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
                   {t.cta.bookCall}
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </a>
@@ -241,7 +241,7 @@ const Services = () => {
             <p className="text-muted-foreground mb-8">{t.finalCta.subtitle}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="xl" asChild>
-                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
                   {t.cta.bookCall}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>

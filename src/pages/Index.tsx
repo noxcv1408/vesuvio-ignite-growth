@@ -7,7 +7,7 @@ import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
 import AnimatedCard from '@/components/shared/AnimatedCard';
 
-const BOOKING_URL = 'https://calendar.app.google/Pf3jmxHgmtEtdKGX9';
+const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/xrWBbuxYBZ3hnjLA9';
 const WHATSAPP_AUDIT_URL = 'https://wa.me/393314054922?text=Buongiorno%21%20Vorrei%20richiedere%20un%20audit%20gratuito.';
 
 // Hero Section
@@ -77,7 +77,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button variant="hero" size="xl" asChild>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+              <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
                 {t.cta.bookCall}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
@@ -270,7 +270,7 @@ const FinalCtaSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button variant="hero" size="xl" asChild className="animate-glow-pulse">
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+              <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
                 {t.cta.bookCall}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>

@@ -6,7 +6,7 @@ import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
 import AnimatedCard from '@/components/shared/AnimatedCard';
 
-const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/xrWBbuxYBZ3hnjLA9';
 
 const aboutContent = {
   hero: {
@@ -37,10 +37,10 @@ const aboutContent = {
   process: {
     title: 'Il Nostro Processo',
     steps: [
-      { num: '01', title: 'Discovery', desc: 'Analizziamo il tuo business, il mercato e gli obiettivi.' },
-      { num: '02', title: 'Strategia', desc: "Definiamo il piano d'azione con KPI chiari e timeline." },
-      { num: '03', title: 'Implementazione', desc: 'Costruiamo e lanciamo i sistemi rapidamente.' },
-      { num: '04', title: 'Ottimizzazione', desc: 'Monitoriamo, testiamo e miglioriamo continuamente.' },
+      { num: '1', title: 'Discovery', desc: 'Analizziamo il tuo business, il mercato e gli obiettivi.' },
+      { num: '2', title: 'Strategia', desc: "Definiamo il piano d'azione con KPI chiari e timeline." },
+      { num: '3', title: 'Implementazione', desc: 'Costruiamo e lanciamo i sistemi rapidamente.' },
+      { num: '4', title: 'Ottimizzazione', desc: 'Monitoriamo, testiamo e miglioriamo continuamente.' },
     ],
   },
 };
@@ -166,7 +166,7 @@ const About = () => {
             </h2>
             <p className="text-muted-foreground mb-8">{t.finalCta.subtitle}</p>
             <Button variant="hero" size="xl" asChild>
-              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
                 {t.cta.bookCall}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>

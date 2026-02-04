@@ -11,11 +11,6 @@ const Footer = () => {
     { href: '/about', label: t.nav.about },
   ];
 
-  const legalLinks = [
-    { href: '/privacy', label: t.footer.privacy },
-    { href: '/terms', label: t.footer.terms },
-    { href: '/cookies', label: t.footer.cookies },
-  ];
 
   return (
     <footer className="bg-charcoal border-t border-border">
@@ -62,19 +57,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h4 className="font-display font-semibold text-foreground mb-6">{t.footer.legal}</h4>
-            <ul className="space-y-3">
-              {legalLinks.map((link) => (
-                <li key={link.href}>
-                  <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
 

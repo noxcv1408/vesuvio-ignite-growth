@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
+const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/xrWBbuxYBZ3hnjLA9';
 const WHATSAPP_AUDIT_URL = 'https://wa.me/393314054922?text=Buongiorno%21%20Vorrei%20richiedere%20un%20audit%20gratuito.';
 
 const Header = () => {
@@ -67,7 +67,7 @@ const Header = () => {
             </a>
           </Button>
           <Button variant="lava" size="sm" asChild>
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+            <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
               {t.cta.bookCall}
             </a>
           </Button>
@@ -120,7 +120,7 @@ const Header = () => {
                 </Button>
                 <Button variant="lava" asChild>
                   <a
-                    href={CALENDLY_URL}
+                    href={GOOGLE_CALENDAR_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMobileMenuOpen(false)}
