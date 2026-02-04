@@ -18,78 +18,31 @@ import { useToast } from '@/hooks/use-toast';
 
 const CALENDLY_URL = 'https://calendly.com/noxcv1408/30min';
 
-const faqData = {
-  it: [
-    {
-      question: 'Quanto costa una consulenza iniziale?',
-      answer: 'La prima call strategica di 30 minuti è completamente gratuita. Analizziamo insieme le tue esigenze e valutiamo come possiamo aiutarti.',
-    },
-    {
-      question: 'Qual è il budget minimo per iniziare?',
-      answer: 'I nostri progetti partono da €2.000/mese per servizi gestiti. Per progetti una tantum, il minimo è €3.000. Tutto dipende dalle tue esigenze specifiche.',
-    },
-    {
-      question: 'Quanto tempo richiede un progetto tipico?',
-      answer: 'Un setup completo di automazione richiede 4-8 settimane. Campagne ads possono partire in 7-14 giorni. Durante la call ti daremo una timeline precisa.',
-    },
-    {
-      question: 'Lavorate solo con aziende di Napoli?',
-      answer: 'No, lavoriamo con clienti in tutta Italia e in Europa. Il 70% del nostro lavoro è da remoto, con call regolari e report dettagliati.',
-    },
-    {
-      question: 'Cosa include l\'audit gratuito?',
-      answer: 'Analizziamo il tuo attuale stack marketing, identifichiamo le opportunità di automazione e forniamo un piano d\'azione con priorità chiare e ROI stimato.',
-    },
-  ],
-  en: [
-    {
-      question: 'How much does an initial consultation cost?',
-      answer: 'The first 30-minute strategy call is completely free. We analyze your needs together and assess how we can help.',
-    },
-    {
-      question: 'What is the minimum budget to start?',
-      answer: 'Our projects start from €2,000/month for managed services. For one-time projects, the minimum is €3,000. Everything depends on your specific needs.',
-    },
-    {
-      question: 'How long does a typical project take?',
-      answer: 'A complete automation setup requires 4-8 weeks. Ad campaigns can start in 7-14 days. During the call we\'ll give you a precise timeline.',
-    },
-    {
-      question: 'Do you only work with Naples-based companies?',
-      answer: 'No, we work with clients across Italy and Europe. 70% of our work is remote, with regular calls and detailed reports.',
-    },
-    {
-      question: 'What does the free audit include?',
-      answer: 'We analyze your current marketing stack, identify automation opportunities, and provide an action plan with clear priorities and estimated ROI.',
-    },
-  ],
-  ru: [
-    {
-      question: 'Сколько стоит первичная консультация?',
-      answer: 'Первый 30-минутный стратегический звонок полностью бесплатный. Мы вместе анализируем ваши потребности и оцениваем, как можем помочь.',
-    },
-    {
-      question: 'Какой минимальный бюджет для старта?',
-      answer: 'Наши проекты начинаются от €2,000/месяц за управляемые услуги. Для разовых проектов минимум €3,000. Всё зависит от ваших конкретных потребностей.',
-    },
-    {
-      question: 'Сколько времени занимает типичный проект?',
-      answer: 'Полная настройка автоматизации требует 4-8 недель. Рекламные кампании могут стартовать за 7-14 дней. На звонке дадим точный таймлайн.',
-    },
-    {
-      question: 'Вы работаете только с компаниями из Неаполя?',
-      answer: 'Нет, мы работаем с клиентами по всей Италии и Европе. 70% нашей работы удаленно, с регулярными звонками и детальными отчетами.',
-    },
-    {
-      question: 'Что включает бесплатный аудит?',
-      answer: 'Мы анализируем ваш текущий маркетинговый стек, определяем возможности автоматизации и предоставляем план действий с приоритетами и оценкой ROI.',
-    },
-  ],
-};
+const faqData = [
+  {
+    question: 'Quanto costa una consulenza iniziale?',
+    answer: 'La prima call strategica di 30 minuti è completamente gratuita. Analizziamo insieme le tue esigenze e valutiamo come possiamo aiutarti.',
+  },
+  {
+    question: 'Qual è il budget minimo per iniziare?',
+    answer: 'I nostri progetti partono da €2.000/mese per servizi gestiti. Per progetti una tantum, il minimo è €3.000. Tutto dipende dalle tue esigenze specifiche.',
+  },
+  {
+    question: 'Quanto tempo richiede un progetto tipico?',
+    answer: 'Un setup completo di automazione richiede 4-8 settimane. Campagne ads possono partire in 7-14 giorni. Durante la call ti daremo una timeline precisa.',
+  },
+  {
+    question: 'Lavorate solo con aziende di Napoli?',
+    answer: 'No, lavoriamo con clienti in tutta Italia e in Europa. Il 70% del nostro lavoro è da remoto, con call regolari e report dettagliati.',
+  },
+  {
+    question: "Cosa include l'audit gratuito?",
+    answer: "Analizziamo il tuo attuale stack marketing, identifichiamo le opportunità di automazione e forniamo un piano d'azione con priorità chiare e ROI stimato.",
+  },
+];
 
 const Contact = () => {
-  const { language, t } = useLanguage();
-  const faqs = faqData[language];
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -121,23 +74,18 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Create mailto link
+
     const subject = encodeURIComponent(`Richiesta da ${formData.name} - ${formData.company || 'Sito web'}`);
     const body = encodeURIComponent(
       `Nome: ${formData.name}\nEmail: ${formData.email}\nAzienda: ${formData.company || 'N/A'}\n\nMessaggio:\n${formData.message}`
     );
     window.location.href = `mailto:info@vesuviodigital.com?subject=${subject}&body=${body}`;
-    
+
     toast({
-      title: language === 'it' ? 'Email pronta!' : language === 'en' ? 'Email ready!' : 'Email готов!',
-      description: language === 'it' 
-        ? 'Si aprirà il tuo client email per inviare il messaggio.' 
-        : language === 'en' 
-        ? 'Your email client will open to send the message.' 
-        : 'Откроется ваш почтовый клиент для отправки сообщения.',
+      title: 'Email pronta!',
+      description: 'Si aprirà il tuo client email per inviare il messaggio.',
     });
-    
+
     setFormData({ name: '', email: '', company: '', message: '' });
     setIsSubmitting(false);
   };
@@ -145,23 +93,18 @@ const Contact = () => {
   const handleAuditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsAuditSubmitting(true);
-    
-    // Create mailto link for audit
+
     const subject = encodeURIComponent(`Richiesta Audit Gratuito - ${auditFormData.name}`);
     const body = encodeURIComponent(
       `Nome: ${auditFormData.name}\nEmail: ${auditFormData.email}\nSito Web: ${auditFormData.website || 'N/A'}\n\nObiettivi:\n${auditFormData.goals}`
     );
     window.location.href = `mailto:info@vesuviodigital.com?subject=${subject}&body=${body}`;
-    
+
     toast({
-      title: language === 'it' ? 'Richiesta audit pronta!' : language === 'en' ? 'Audit request ready!' : 'Запрос аудита готов!',
-      description: language === 'it' 
-        ? 'Si aprirà il tuo client email per inviare la richiesta.' 
-        : language === 'en' 
-        ? 'Your email client will open to send the request.' 
-        : 'Откроется ваш почтовый клиент для отправки запроса.',
+      title: 'Richiesta audit pronta!',
+      description: 'Si aprirà il tuo client email per inviare la richiesta.',
     });
-    
+
     setAuditFormData({ name: '', email: '', website: '', goals: '' });
     setIsAuditSubmitting(false);
   };
@@ -169,7 +112,7 @@ const Contact = () => {
   const contactInfo = [
     { icon: Mail, label: t.contact.info.email, value: 'info@vesuviodigital.com', href: 'mailto:info@vesuviodigital.com' },
     { icon: MapPin, label: t.contact.info.address, value: 'Napoli, Italia', href: null },
-    { icon: Clock, label: t.contact.info.hours, value: language === 'it' ? 'Lun-Ven: 9:00 - 18:00' : language === 'en' ? 'Mon-Fri: 9:00 AM - 6:00 PM' : 'Пн-Пт: 9:00 - 18:00', href: null },
+    { icon: Clock, label: t.contact.info.hours, value: 'Lun-Ven: 9:00 - 18:00', href: null },
   ];
 
   return (
@@ -257,10 +200,10 @@ const Contact = () => {
                     className="bg-muted border-border resize-none"
                   />
                 </div>
-                <Button 
-                  type="submit" 
-                  variant="hero" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
                   className="w-full"
                   disabled={isSubmitting}
                 >
@@ -309,11 +252,7 @@ const Contact = () => {
                   {t.cta.bookCall}
                 </h3>
                 <p className="text-muted-foreground text-sm mb-6">
-                  {language === 'it' 
-                    ? '30 minuti di strategia gratuita. Scegli uno slot disponibile.'
-                    : language === 'en'
-                    ? '30 minutes of free strategy. Choose an available slot.'
-                    : '30 минут бесплатной стратегии. Выберите доступный слот.'}
+                  30 minuti di strategia gratuita. Scegli uno slot disponibile.
                 </p>
                 <Button variant="hero" size="lg" className="w-full" asChild>
                   <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
@@ -366,7 +305,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    {language === 'it' ? 'Sito Web' : language === 'en' ? 'Website' : 'Сайт'}
+                    Sito Web
                   </label>
                   <Input
                     type="url"
@@ -378,25 +317,21 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    {language === 'it' ? 'Obiettivi principali' : language === 'en' ? 'Main goals' : 'Основные цели'} *
+                    Obiettivi principali *
                   </label>
                   <Textarea
                     required
                     rows={4}
-                    placeholder={language === 'it' 
-                      ? 'Descrivi brevemente cosa vorresti ottenere...'
-                      : language === 'en'
-                      ? 'Briefly describe what you would like to achieve...'
-                      : 'Кратко опишите, чего вы хотели бы достичь...'}
+                    placeholder="Descrivi brevemente cosa vorresti ottenere..."
                     value={auditFormData.goals}
                     onChange={(e) => setAuditFormData({ ...auditFormData, goals: e.target.value })}
                     className="bg-background border-border resize-none"
                   />
                 </div>
-                <Button 
-                  type="submit" 
-                  variant="lava" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  variant="lava"
+                  size="lg"
                   className="w-full"
                   disabled={isAuditSubmitting}
                 >
@@ -415,7 +350,7 @@ const Contact = () => {
           <SectionHeading title={t.faq.title} />
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="space-y-4">
-              {faqs.map((faq, index) => (
+              {faqData.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
