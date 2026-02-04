@@ -6,7 +6,7 @@ import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/shared/SectionHeading';
 import AnimatedCard from '@/components/shared/AnimatedCard';
 
-const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/xrWBbuxYBZ3hnjLA9';
+const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/DSwK4BwZyn4dKJVa7';
 
 const aboutContent = {
   hero: {
